@@ -1,0 +1,23 @@
+[
+    {
+      "itemId": "it1",
+      "title": "Demo iPhone 13",
+      "price": { "value": 300, "currency": "GBP" },
+      "itemHref": "https://example.com/it1",
+      "seller": { "username": "sellerA" },
+      "conditionDisplayName": "Used",
+      "categories": [ { "categoryId": "9355", "categoryName": "Cell Phones" } ],
+      "brand": "Apple"
+    },
+    {
+      "itemId": "it2",
+      "title": "Demo LEGO Star Wars",
+      "price": { "value": 25, "currency": "GBP" },
+      "itemHref": "https://example.com/it2",
+      "seller": { "username": "sellerB" },
+      "conditionDisplayName": "New",
+      "categories": [ { "categoryId": "183454", "categoryName": "LEGO" } ],
+      "brand": "LEGO"
+    }
+  ]
+  

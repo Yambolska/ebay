@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16
+    container_name: ebay-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5 
+    ports:
+      - "5432:5432"   # <-- expose to host 
+
+  app:
+    build: .
+    container_name: ebay-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:           # <--- Burada .env dosyasını kullanıyoruz
+      - .env
+    volumes:
+      - ./queries.json:/app/queries.json:ro
+      - ./.env:/app/.env:ro   # opsiyonel, kod içinde load_dotenv için
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: ebay-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
