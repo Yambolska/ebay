@@ -12,7 +12,7 @@ if not API_KEY:
 genai.configure(api_key=API_KEY)
 
 def predict_prices_with_gemini(items):
-    # Çıktıyı makinece okunur yapıyoruz: sadece sayılar ve '||' ayraç
+    #  sadece sayılar ve '||' ayraç
     prompt = (
         "Aşağıdaki ürünler için piyasa fiyat tahmini yap.\n"
         "Sadece sayıları yaz ve her tahmini '||' ile AYIR. Başka hiçbir şey yazma.\n"
